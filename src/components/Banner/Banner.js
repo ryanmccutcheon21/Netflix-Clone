@@ -1,7 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Banner.css'
+import axios from '../../api/axios'
+import requests from '../../api/Requests'
 
 const Banner = () => {
+
+    const [movie, setMovie] = useState([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const request = await axios.get(requests.fetchComedyMovies)
+            setMovie(
+                request.data.results[
+                Math.floor(Math.random() * request.data.results.length - 1)
+                ]
+            )
+            return request
+        }
+        fetchData()
+    }, [])
+
+
+    console.log(movie)
 
     const truncate = (string, n) => {
         return string?.length > n ? string.substr(0, n - 1) + ' ...' : string
@@ -10,7 +30,7 @@ const Banner = () => {
     return (
         <header className='banner' style={{
             backgroundSize: 'cover',
-            backgroundImage: `url('https://assets.nflxext.com/ffe/siteui/vlv3/afc06103-4d6a-4236-b496-34b671a7e9ba/0a1bb975-77bd-4c7e-8524-7fb05c9dd015/US-en-20221003-popsignuptwoweeks-perspective_alpha_website_large.jpg')`,
+            backgroundImage: `url('https://image.tmdb.org/t/p/original/${movie?.backdrop_path}')`,
             backgroundPosition: 'center center'
         }}>
             <div className='banner_contents'>
