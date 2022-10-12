@@ -1,6 +1,6 @@
 import React from 'react'
-import Nav from '../Navbar/Nav'
-import Banner from '../Banner/Banner'
+import Nav from '../../components/Navbar/Nav'
+import Banner from '../../components/Banner/Banner'
 import requests from '../../api/Requests'
 import Row from './Row/Row'
 
