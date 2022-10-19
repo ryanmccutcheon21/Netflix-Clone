@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Router, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { login, logout, selectUser } from './features/userSlice';
 import { auth } from './firebase';
@@ -30,20 +30,18 @@ function App() {
 
   return (
     <div className="app">
-      <Router>
-        {!user ? (
-          <LoginScreen />
-        ) : (
-          <Switch>
-            <Route path='/profile'>
-              <ProfileScreen />
-            </Route>
-            <Route exact path='/'>
-              <HomeScreen />
-            </Route>
-          </Switch>
-        )}
-      </Router>
+      {!user ? (
+        <LoginScreen />
+      ) : (
+        <Routes>
+          <Route path='/profile'>
+            <ProfileScreen />
+          </Route>
+          <Route exact path='/'>
+            <HomeScreen />
+          </Route>
+        </Routes>
+      )}
     </div>
   );
 }
